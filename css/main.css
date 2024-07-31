@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --color-primary: #6EC1E4;
-  --color-secondary: #54595F;
-  --color-text: #7A7A7A;
-  --color-green: #61CE70;
-  --color-yelow: #ddf127;
-  --color-main-dark: #1E163B;
-  --color-main-ligth: #8E6EC8;
+  --color-oxford-blue: #0A122A;
+  --color-aspargus: #698F3F;
+  --color-text: #535353;
+  --color-seasalt: #FBFAF8;
+  --color-bone: #E7DECD;
+  --color-bole: #804E49;
+  --color-alabaster: #F1ECE3;
 }
 
 * {
@@ -33,7 +33,7 @@ a {
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 4fr ;
-  background-color: var(--color-main-dark);
+  background-color: var(--color-oxford-blue);
 }
 
 aside {
@@ -45,7 +45,7 @@ aside {
   height: 100vh;
   padding: 2rem;
   padding-right: 0;
-  color: var(--color-yelow);
+  color: var(--color-bone);
 }
 
 .logo {
@@ -66,7 +66,7 @@ aside {
   gap: 0.5rem;
   background-color: transparent;
   border: 0;
-  color: var(--color-yelow);
+  color: var(--color-bone);
   font-size: 1rem;
   font-weight: 400;
   cursor: pointer;
@@ -74,8 +74,8 @@ aside {
 }
 
 .btn-menu.active {
-  background-color: var(--color-yelow);
-  color: var(--color-main-dark);
+  background-color: var(--color-seasalt);
+  color: var(--color-aspargus);
   width: 100%;
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
@@ -91,23 +91,23 @@ aside {
 }
 
 span {
-  color: var(--color-main-ligth);
+  color: var(--color-aspargus);
 }
 
 .text-footer {
-  color: var(--color-main-ligth);
+  color: var(--color-bone);
   font-size: 0.85rem;
 }
 
 main {
-  background-color: var(--color-yelow);
+  background-color: var(--color-seasalt);
   margin: 1rem 1rem 1rem 0;
   border-radius: 2rem;
   padding: 3rem;
 }
 
 .main-title {
-  color: var(--color-main-dark);
+  color: var(--color-aspargus);
   margin-bottom: 2rem;
 }
 
@@ -125,8 +125,8 @@ border-radius: 1rem;
 .product-datail {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-main-dark);
-  color: var(--color-main-ligth);
+  background-color: var(--color-aspargus);
+  color: var(--color-seasalt);
   padding: 0.5rem;
   border-radius: 1rem;
   margin-top: -1.7rem;
@@ -140,24 +140,99 @@ border-radius: 1rem;
 
 .product-add {
   border: 0;
-  background-color: var(--color-yelow);
-  color: var(--color-main-dark);
+  background-color: var(--color-oxford-blue);
+  color: var(--color-bone);
   padding: 0.25rem;
   text-transform: uppercase;
   border-radius: 0.5rem;
   cursor: pointer;
-  border: 2px solid var(--color-yelow);
+  border: 2px solid var(--color-oxford-blue);
 }
 
 .product-add:hover {
-  background-color: var(--color-main-ligth);
-  color: var(--color-yelow);
+  background-color: var(--color-bone);
+  color: var(--color-oxford-blue);
   transition: 0.3s;
 }
 
 /* Carrito */
 
-.empty-cart {
+.empty-cart, 
+.buy-sucess {
   /* display: none; */
-  color: var(--color-main-dark);
+  color: var(--color-aspargus);
+  margin: 1rem;
+}
+
+.products-cart {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.product-cart {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--color-alabaster);
+  border-radius: 1rem;
+  align-items: center;
+  color: var(--color-oxford-blue);
+  padding: 0.5rem;
+  padding-right: 1.5rem;
+}
+
+.product-cart-img {
+  width: 4rem;
+  border-radius: 1rem;
+}
+
+.delete-product-cart {
+  border: 0;
+  background-color: var(--color-bone);
+  color: var(--color-aspargus);
+  cursor: pointer;
+}
+
+.events-cart {
+  display: flex;
+  justify-content: space-between;
+}
+
+.drop-cart {
+  border: 0;
+  padding: 1rem;
+  background-color: #698F3F;
+  border-radius: 1rem;
+  color: var(--color-bone);
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.total-price {
+  display: flex;
+}
+
+.total {
+  display: flex;
+  background-color: var(--color-alabaster);
+  color: var(--color-oxford-blue);
+  border: 0;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  padding: 1rem;
+  gap: 0.5rem;
+  text-transform: uppercase;
+}
+
+.btn-buy {
+  border: 0;
+  padding: 1rem;
+  background-color: var(--color-aspargus);
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  color: var(--color-bone);
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
 }
