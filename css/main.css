@@ -68,7 +68,7 @@ aside {
   border: 0;
   color: var(--color-bone);
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   cursor: pointer;
   padding: 1rem;
 }
@@ -88,6 +88,18 @@ aside {
 
 .btn-cart {
   margin-top: 8rem;
+}
+
+.cantidad-compras {
+  background-color: var(--color-seasalt);
+  color: var(--color-oxford-blue);
+  padding: .25rem;
+  border-radius: .25rem;
+}
+
+.btn-cart.btn-menu.active .cantidad-compras {
+  background-color: var(--color-oxford-blue);
+  color: var(--color-seasalt);
 }
 
 span {
@@ -235,4 +247,8 @@ border-radius: 1rem;
   font-weight: 500;
   text-transform: uppercase;
   cursor: pointer;
+}
+
+.disabled {
+  display: none;
 }
