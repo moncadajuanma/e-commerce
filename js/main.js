@@ -9,7 +9,7 @@ const productos = [
       nombre: "Abrigos",
       id: "abrigos",
     },
-    precio: 1000,
+    precio: 135000,
   },
   {
     id: "abrigo-02",
@@ -19,7 +19,7 @@ const productos = [
       nombre: "Abrigos",
       id: "abrigos",
     },
-    precio: 1000,
+    precio: 110000,
   },
   {
     id: "abrigo-03",
@@ -29,7 +29,7 @@ const productos = [
       nombre: "Abrigos",
       id: "abrigos",
     },
-    precio: 1000,
+    precio: 159900,
   },
   {
     id: "abrigo-04",
@@ -39,7 +39,7 @@ const productos = [
       nombre: "Abrigos",
       id: "abrigos",
     },
-    precio: 1000,
+    precio: 140000,
   },
   {
     id: "abrigo-05",
@@ -49,7 +49,7 @@ const productos = [
       nombre: "Abrigos",
       id: "abrigos",
     },
-    precio: 1000,
+    precio: 125000,
   },
   // Camisetas
   {
@@ -60,7 +60,7 @@ const productos = [
       nombre: "Camisetas",
       id: "camisetas",
     },
-    precio: 1000,
+    precio: 29900,
   },
   {
     id: "camiseta-02",
@@ -70,7 +70,7 @@ const productos = [
       nombre: "Camisetas",
       id: "camisetas",
     },
-    precio: 1000,
+    precio: 40000,
   },
   {
     id: "camiseta-03",
@@ -80,7 +80,7 @@ const productos = [
       nombre: "Camisetas",
       id: "camisetas",
     },
-    precio: 1000,
+    precio: 35600,
   },
   {
     id: "camiseta-04",
@@ -90,7 +90,7 @@ const productos = [
       nombre: "Camisetas",
       id: "camisetas",
     },
-    precio: 1000,
+    precio: 31000,
   },
   {
     id: "camiseta-05",
@@ -100,7 +100,7 @@ const productos = [
       nombre: "Camisetas",
       id: "camisetas",
     },
-    precio: 1000,
+    precio: 39900,
   },
   {
     id: "camiseta-06",
@@ -110,7 +110,7 @@ const productos = [
       nombre: "Camisetas",
       id: "camisetas",
     },
-    precio: 1000,
+    precio: 29900,
   },
   {
     id: "camiseta-07",
@@ -120,7 +120,7 @@ const productos = [
       nombre: "Camisetas",
       id: "camisetas",
     },
-    precio: 1000,
+    precio: 38900,
   },
   {
     id: "camiseta-08",
@@ -130,7 +130,7 @@ const productos = [
       nombre: "Camisetas",
       id: "camisetas",
     },
-    precio: 1000,
+    precio: 45500,
   },
   // Pantalones
   {
@@ -141,7 +141,7 @@ const productos = [
       nombre: "Pantalones",
       id: "pantalones",
     },
-    precio: 1000,
+    precio: 90500,
   },
   {
     id: "pantalon-02",
@@ -151,7 +151,7 @@ const productos = [
       nombre: "Pantalones",
       id: "pantalones",
     },
-    precio: 1000,
+    precio: 89900,
   },
   {
     id: "pantalon-03",
@@ -161,7 +161,7 @@ const productos = [
       nombre: "Pantalones",
       id: "pantalones",
     },
-    precio: 1000,
+    precio: 115500,
   },
   {
     id: "pantalon-04",
@@ -171,7 +171,7 @@ const productos = [
       nombre: "Pantalones",
       id: "pantalones",
     },
-    precio: 1000,
+    precio: 120000,
   },
   {
     id: "pantalon-05",
@@ -181,6 +181,41 @@ const productos = [
       nombre: "Pantalones",
       id: "pantalones",
     },
-    precio: 1000,
+    precio: 100000,
   },
 ];
+
+const contenedorProductos = document.getElementById("products-container");
+const botonesCategorias = document.querySelectorAll(".btn-category");
+
+function cargarProductos() {
+  contenedorProductos.innerHTML = "";
+
+  productos.forEach((producto) => {
+    const div = document.createElement("div");
+    div.classList.add("product");
+    div.innerHTML = `
+    <img class="product-img" src="${producto.imagen}" alt="${producto.imagen}">
+    <div class="product-datail">
+      <h3 class="product-title">${producto.titulo}</h3>
+      <p class="product-price">$ ${producto.precio}</p>
+      <button class="product-add">Agregar</button>
+    </div>
+    `;
+    contenedorProductos.append(div);
+  });
+}
+
+cargarProductos(productos);
+
+botonesCategorias.forEach((boton) => {
+  boton.addEventListener("click", (e) => {
+    botonesCategorias.forEach((boton) => boton.classList.remove("active"));
+    e.currentTarget.classList.add("active");
+
+    const botonProductos = productos.filter(
+      (producto) => producto.categoria.id === e.currentTarget.id
+    );
+    contenedorProductos.innerHTML = botonProductos;
+  });
+});
