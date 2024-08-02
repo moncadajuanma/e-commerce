@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --color-oxford-blue: #0A122A;
-  --color-aspargus: #698F3F;
-  --color-text: #535353;
-  --color-seasalt: #FBFAF8;
-  --color-bone: #E7DECD;
-  --color-bole: #804E49;
-  --color-alabaster: #F1ECE3;
+  --color-background1: #4a5568;
+  --color-background2: #718096;
+  --color-main1: #a0aec0;
+  --color-main2: #e4e7eb;
+  --color-main3: #f5f7fa;
+  --color-alert: #ef0d33;
+  --color-sucessful: #1eff05;
 }
 
 * {
@@ -33,7 +33,7 @@ a {
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 4fr ;
-  background-color: var(--color-oxford-blue);
+  background-color: var(--color-background1);
 }
 
 aside {
@@ -45,7 +45,7 @@ aside {
   height: 100vh;
   padding: 2rem;
   padding-right: 0;
-  color: var(--color-bone);
+  color: var(--color-main3);
 }
 
 .logo {
@@ -66,7 +66,7 @@ aside {
   gap: 0.5rem;
   background-color: transparent;
   border: 0;
-  color: var(--color-bone);
+  color: var(--color-main2);
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
@@ -75,8 +75,8 @@ aside {
 }
 
 .btn-menu.active {
-  background-color: var(--color-seasalt);
-  color: var(--color-aspargus);
+  background-color: var(--color-main3);
+  color: var(--color-background1);
   width: 100%;
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
@@ -92,36 +92,44 @@ aside {
 }
 
 .cantidad-compras {
-  background-color: var(--color-seasalt);
-  color: var(--color-oxford-blue);
-  padding: .25rem;
-  border-radius: .25rem;
+  background-color: var(--color-main3);
+  color: var(--color-alert);
+  padding: .4rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-alert);
+}
+
+.cantidad-compras:hover {
+  transform: scale(1.2);
+  transition: 0.3s;
 }
 
 .btn-cart.btn-menu.active .cantidad-compras {
-  background-color: var(--color-oxford-blue);
-  color: var(--color-seasalt);
+  background-color: var(--color-background);
+  color: var(--color-alert);
 }
 
 span {
-  color: var(--color-aspargus);
+  color: var(--color-alert);
 }
 
 .text-footer {
-  color: var(--color-bone);
+  color: var(--color-main1);
   font-size: 0.85rem;
 }
 
 main {
-  background-color: var(--color-seasalt);
+  background-color: var(--color-main3);
   margin: 1rem 1rem 1rem 0;
   border-radius: 2rem;
   padding: 3rem;
 }
 
 .main-title {
-  color: var(--color-aspargus);
+  font-size: 1.8rem;
+  color: var(--color-background1);
   margin-bottom: 2rem;
+  text-shadow: 3px 3px 1px var(--color-main1);
 }
 
 .products-container {
@@ -138,8 +146,8 @@ border-radius: 1rem;
 .product-datail {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-aspargus);
-  color: var(--color-seasalt);
+  background-color: var(--color-main1);
+  color: var(--color-background1);
   padding: 0.5rem;
   border-radius: 1rem;
   margin-top: -1.7rem;
@@ -153,18 +161,19 @@ border-radius: 1rem;
 
 .product-add {
   border: 0;
-  background-color: var(--color-oxford-blue);
-  color: var(--color-bone);
+  background-color: var(--color-background2);
+  color: var(--color-main2);
   padding: 0.25rem;
   text-transform: uppercase;
   border-radius: 0.5rem;
   cursor: pointer;
-  border: 2px solid var(--color-oxford-blue);
+  border: 2px solid var(--color-background2);
 }
 
 .product-add:hover {
-  background-color: var(--color-bone);
-  color: var(--color-oxford-blue);
+  background-color: var(--color-main2);
+  color: var(--color-alert);
+  transform: scale(1.05);
   transition: 0.3s;
 }
 
@@ -172,8 +181,7 @@ border-radius: 1rem;
 
 .empty-cart, 
 .buy-sucess {
-  /* display: none; */
-  color: var(--color-aspargus);
+  color: var(--color-alert);
   margin: 1rem;
 }
 
@@ -186,10 +194,10 @@ border-radius: 1rem;
 .product-cart {
   display: flex;
   justify-content: space-between;
-  background-color: var(--color-alabaster);
+  background-color: var(--color-main2);
   border-radius: 1rem;
   align-items: center;
-  color: var(--color-oxford-blue);
+  color: var(--color-background1);
   padding: 0.5rem;
   padding-right: 1.5rem;
 }
@@ -199,10 +207,14 @@ border-radius: 1rem;
   border-radius: 1rem;
 }
 
+.product-cart h3 {
+  font-size: 1rem;
+}
+
 .delete-product-cart {
   border: 0;
-  background-color: var(--color-bone);
-  color: var(--color-aspargus);
+  background-color: var(--color-main2);
+  color: var(--color-alert);
   cursor: pointer;
 }
 
@@ -214,12 +226,18 @@ border-radius: 1rem;
 .drop-cart {
   border: 0;
   padding: 1rem;
-  background-color: #698F3F;
+  background-color: var(--color-main2);
   border-radius: 1rem;
-  color: var(--color-bone);
+  color: var(--color-background1);
   font-weight: 500;
   text-transform: uppercase;
   cursor: pointer;
+}
+
+.drop-cart:hover {
+  transform: scale(1.01);
+  transition: 0.4s;
+  border: 1px solid var(--color-background2);
 }
 
 .total-price {
@@ -228,26 +246,33 @@ border-radius: 1rem;
 
 .total {
   display: flex;
-  background-color: var(--color-alabaster);
-  color: var(--color-oxford-blue);
+  background-color: var(--color-main2);
+  color: var(--color-background1);
   border: 0;
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
   padding: 1rem;
   gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
   text-transform: uppercase;
 }
 
 .btn-buy {
   border: 0;
   padding: 1rem;
-  background-color: var(--color-aspargus);
+  background-color: var(--color-background1);
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
-  color: var(--color-bone);
+  color: var(--color-main3);
   font-weight: 500;
   text-transform: uppercase;
   cursor: pointer;
+}
+
+.btn-buy:hover {
+  color: var(--color-sucessful);
+  transition: 0.3s;
 }
 
 .disabled {
