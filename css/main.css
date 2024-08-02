@@ -105,7 +105,7 @@ aside {
 }
 
 .btn-cart.btn-menu.active .cantidad-compras {
-  background-color: var(--color-background);
+  background-color: var(--color-alert);
   color: var(--color-alert);
 }
 
@@ -129,13 +129,13 @@ main {
   font-size: 1.8rem;
   color: var(--color-background1);
   margin-bottom: 2rem;
-  text-shadow: 3px 3px 1px var(--color-main1);
+  text-shadow: 3px 3px 4px var(--color-background2);
 }
 
 .products-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .product-img {
@@ -146,17 +146,22 @@ border-radius: 1rem;
 .product-datail {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-main1);
+  background-color: var(--color-main2);
   color: var(--color-background1);
   padding: 0.5rem;
   border-radius: 1rem;
+  border: 1px solid var(--color-background2);
   margin-top: -1.7rem;
   position: relative;
   gap: 0.25rem;
 }
 
 .product-title {
-  font-size: 1rem;
+  font-size: 0.85rem;
+}
+
+.product-price {
+  font-size: 0.85rem;
 }
 
 .product-add {
@@ -164,10 +169,11 @@ border-radius: 1rem;
   background-color: var(--color-background2);
   color: var(--color-main2);
   padding: 0.25rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   border-radius: 0.5rem;
   cursor: pointer;
-  border: 2px solid var(--color-background2);
+  border: 1px solid var(--color-background2);
 }
 
 .product-add:hover {
@@ -202,12 +208,36 @@ border-radius: 1rem;
   padding-right: 1.5rem;
 }
 
+.product-cart p {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
 .product-cart-img {
   width: 4rem;
   border-radius: 1rem;
 }
 
+.product-cart-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .product-cart h3 {
+  font-size: 1rem;
+}
+
+.product-cart-quantity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-cart-price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-size: 1rem;
 }
 
@@ -216,6 +246,12 @@ border-radius: 1rem;
   background-color: var(--color-main2);
   color: var(--color-alert);
   cursor: pointer;
+  font-size: 1rem;
+}
+
+.delete-product-cart:hover {
+  transform:scale(1.2);
+  transition: .3s;
 }
 
 .events-cart {
@@ -236,8 +272,9 @@ border-radius: 1rem;
 
 .drop-cart:hover {
   transform: scale(1.01);
-  transition: 0.4s;
-  border: 1px solid var(--color-background2);
+  transition: 0.3s;
+  background-color: var(--color-background1);
+  color: var(--color-sucessful);
 }
 
 .total-price {
