@@ -2,12 +2,19 @@
 
 :root {
   --color-background1: #4a5568;
+  /* --color-background1: #111010; */
   --color-background2: #718096;
+  /* --color-background2: #e50185; */
   --color-main1: #a0aec0;
+  /* --color-main1: #a0aec0; */
   --color-main2: #e4e7eb;
+  /* --color-main2: #d0ccd1; */
   --color-main3: #f5f7fa;
+  /* --color-main3: #e9ff88; */
   --color-alert: #ef0d33;
+  /* --color-alert: #ef0d33; */
   --color-sucessful: #1eff05;
+  /* --color-sucessful: #1eff05; */
 }
 
 * {
@@ -150,7 +157,7 @@ border-radius: 1rem;
   color: var(--color-background1);
   padding: 0.5rem;
   border-radius: 1rem;
-  border: 1px solid var(--color-background2);
+  border: 1px solid var(--color-alert);
   margin-top: -1.7rem;
   position: relative;
   gap: 0.25rem;
@@ -179,7 +186,8 @@ border-radius: 1rem;
 .product-add:hover {
   background-color: var(--color-main2);
   color: var(--color-alert);
-  transform: scale(1.05);
+  border: 1px solid var(--color-alert);
+  transform: scale(1.02);
   transition: 0.3s;
 }
 
@@ -202,6 +210,7 @@ border-radius: 1rem;
   justify-content: space-between;
   background-color: var(--color-main2);
   border-radius: 1rem;
+  border: 1px solid var(--color-alert);
   align-items: center;
   color: var(--color-background1);
   padding: 0.5rem;
