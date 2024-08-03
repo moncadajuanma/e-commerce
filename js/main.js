@@ -188,9 +188,8 @@ const productos = [
 const contenedorProductos = document.getElementById("products-container");
 const botonesCategorias = document.querySelectorAll(".btn-category");
 
-function cargarProductos() {
+function cargarProductos(productos) {
   contenedorProductos.innerHTML = "";
-
   productos.forEach((producto) => {
     const div = document.createElement("div");
     div.classList.add("product");
@@ -205,17 +204,20 @@ function cargarProductos() {
     contenedorProductos.append(div);
   });
 }
-
+// Carga Inicial de todos los productos
 cargarProductos(productos);
 
+// Evento para escuchar los botones de menu y mostrar las categorias
 botonesCategorias.forEach((boton) => {
   boton.addEventListener("click", (e) => {
-    botonesCategorias.forEach((boton) => boton.classList.remove("active"));
-    e.currentTarget.classList.add("active");
-
-    const botonProductos = productos.filter(
-      (producto) => producto.categoria.id === e.currentTarget.id
-    );
-    contenedorProductos.innerHTML = botonProductos;
+    botonesCategorias.forEach((boton) => {
+      boton.classList.remove("active");
+      e.currentTarget.classList.add("active");
+      document.getElementById("main-title").innerHTML = e.currentTarget.id;
+    });
+    const productosCategoria = productos.filter((producto) => {
+      return producto.categoria.id === e.currentTarget.id;
+    });
+    cargarProductos(productosCategoria);
   });
 });

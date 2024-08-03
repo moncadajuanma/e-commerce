@@ -56,7 +56,7 @@ aside {
 }
 
 .logo {
-  font-weight: 700;
+  font-weight: 800;
   font-size: 1.6rem;
 }
 
@@ -136,6 +136,7 @@ main {
   font-size: 1.8rem;
   color: var(--color-background1);
   margin-bottom: 2rem;
+  text-transform: uppercase;
   text-shadow: 3px 3px 4px var(--color-background2);
 }
 
