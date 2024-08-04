@@ -102,7 +102,7 @@ aside {
   background-color: var(--color-alert);
   color: var(--color-main3);
   padding: .3rem;
-  /* border-radius: 50%; */
+  border-radius: 5rem;
   width: 2rem;
   height: 2rem;
   border: 2px solid var(--color-main3);
