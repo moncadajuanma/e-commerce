@@ -95,15 +95,22 @@ aside {
 }
 
 .btn-cart {
-  margin-top: 8rem;
+  margin-top: 5rem;
 }
 
 .cantidad-compras {
-  background-color: var(--color-main3);
-  color: var(--color-alert);
-  padding: .4rem;
-  border-radius: 50%;
-  border: 1px solid var(--color-alert);
+  background-color: var(--color-alert);
+  color: var(--color-main3);
+  padding: .3rem;
+  /* border-radius: 50%; */
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid var(--color-main3);
+}
+
+.btn-cart.active .cantidad-compras {
+  background-color: var(--color-background1);
+  color: var(--color-main3);
 }
 
 .cantidad-compras:hover {
@@ -111,13 +118,9 @@ aside {
   transition: 0.3s;
 }
 
-.btn-cart.btn-menu.active .cantidad-compras {
-  background-color: var(--color-alert);
-  color: var(--color-alert);
-}
-
 span {
   color: var(--color-alert);
+  text-align: center;
 }
 
 .text-footer {

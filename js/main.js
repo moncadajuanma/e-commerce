@@ -187,6 +187,10 @@ const productos = [
 
 const contenedorProductos = document.getElementById("products-container");
 const botonesCategorias = document.querySelectorAll(".btn-category");
+const titulo = document.getElementById("main-title");
+let botonesAgregar = document.querySelectorAll(".product-add");
+const cantidadCompras = document.getElementById("cantidad-compras");
+let numeroComprasCarrito = 0;
 
 function cargarProductos(productos) {
   contenedorProductos.innerHTML = "";
@@ -202,10 +206,23 @@ function cargarProductos(productos) {
     </div>
     `;
     contenedorProductos.append(div);
+    capturarBtnAgregar();
   });
 }
+
 // Carga Inicial de todos los productos
 cargarProductos(productos);
+
+botonesAgregar.forEach((boton) => {
+  capturarBtnAgregar();
+  boton.addEventListener("click", () => {
+    numeroComprasCarrito += 1;
+    cantidadCompras.innerHTML = numeroComprasCarrito;
+    cantidadCompras.classList.remove("disabled");
+  });
+});
+
+// botonesEliminar.forEach();
 
 // Evento para escuchar los botones de menu y mostrar las categorias
 botonesCategorias.forEach((boton) => {
@@ -213,11 +230,23 @@ botonesCategorias.forEach((boton) => {
     botonesCategorias.forEach((boton) => {
       boton.classList.remove("active");
       e.currentTarget.classList.add("active");
-      document.getElementById("main-title").innerHTML = e.currentTarget.id;
+      titulo.innerHTML = e.currentTarget.id;
     });
+    contenedorProductos.innerHTML = "";
+    // Filtra los objetos que tengan la categoria del boton donde se da click
     const productosCategoria = productos.filter((producto) => {
       return producto.categoria.id === e.currentTarget.id;
     });
-    cargarProductos(productosCategoria);
+
+    if (e.currentTarget.id != "todos") cargarProductos(productosCategoria);
+    else {
+      cargarProductos(productos);
+      titulo.innerHTML = "todos los productos";
+    }
   });
 });
+
+// Funcion para capturar los botones de agregar
+function capturarBtnAgregar() {
+  botonesAgregar = document.querySelectorAll(".product-add");
+}
