@@ -187,11 +187,12 @@ const productos = [
 
 const contenedorProductos = document.getElementById("products-container");
 const botonesCategorias = document.querySelectorAll(".btn-category");
-const titulo = document.getElementById("main-title");
-let botonesAgregar = document.querySelectorAll(".product-add");
 const cantidadCompras = document.getElementById("cantidad-compras");
+let botonesAgregar = [];
+const titulo = document.getElementById("main-title");
 let numeroComprasCarrito = 0;
 
+// Funcion que carga los items del array
 function cargarProductos(productos) {
   contenedorProductos.innerHTML = "";
   productos.forEach((producto) => {
@@ -202,25 +203,37 @@ function cargarProductos(productos) {
     <div class="product-datail">
       <h3 class="product-title">${producto.titulo}</h3>
       <p class="product-price">$ ${producto.precio}</p>
-      <button class="product-add">Agregar</button>
+      <button class="product-add" id="${producto.id}" >Agregar</button>
     </div>
     `;
     contenedorProductos.append(div);
-    capturarBtnAgregar();
   });
+  actualizarBtnAgregar();
 }
 
 // Carga Inicial de todos los productos
 cargarProductos(productos);
 
-botonesAgregar.forEach((boton) => {
-  capturarBtnAgregar();
-  boton.addEventListener("click", () => {
-    numeroComprasCarrito += 1;
-    cantidadCompras.innerHTML = numeroComprasCarrito;
-    cantidadCompras.classList.remove("disabled");
+// Funcion para capturar los botones de agregar cada vez que se actualizan
+function actualizarBtnAgregar() {
+  botonesAgregar = document.querySelectorAll(".product-add");
+
+  botonesAgregar.forEach((boton) => {
+    boton.addEventListener("click", agregarAlCarrito);
   });
-});
+}
+
+// funcion para mostrar el numero en el carrito cuando se hace click en agregar
+const productosEnCarrito = [];
+
+function agregarAlCarrito(e) {
+  const idProducto = e.currentTarget.id;
+  const productoAgregado = productos.find(
+    (producto) => producto.id === idProducto
+  );
+  productosEnCarrito.push(productoAgregado);
+  console.log(productosEnCarrito);
+}
 
 // botonesEliminar.forEach();
 
@@ -237,7 +250,6 @@ botonesCategorias.forEach((boton) => {
     const productosCategoria = productos.filter((producto) => {
       return producto.categoria.id === e.currentTarget.id;
     });
-
     if (e.currentTarget.id != "todos") cargarProductos(productosCategoria);
     else {
       cargarProductos(productos);
@@ -245,8 +257,3 @@ botonesCategorias.forEach((boton) => {
     }
   });
 });
-
-// Funcion para capturar los botones de agregar
-function capturarBtnAgregar() {
-  botonesAgregar = document.querySelectorAll(".product-add");
-}
