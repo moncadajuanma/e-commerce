@@ -186,15 +186,12 @@ const productos = [
 ];
 
 const contenedorProductosCarrito = document.getElementById("products-cart"); //container del carrito
-const numeroCantidadCompras = document.getElementById("cantidad-compras");  //numerito carrito
+let numeroCantidadCompras = document.getElementById("cantidad-compras");  //numerito carrito
 let contenedorProductos = document.getElementById("products-container");  // container de productos
 const botonesCategorias = document.querySelectorAll(".btn-category");  //botones de menu categoria
 let botonesAgregar = document.querySelectorAll(".product-add");
-const precioTotal = document.getElementById("total-price");  
-const carritoVacio = document.getElementById("empty-cart");  //Notificacion de carrito vacio
-const eventosCar = document.getElementById("events-car");  
 const titulo = document.getElementById("main-title");
-const productosEnCarrito = [];
+let productosEnCarrito = [];
 let cantidadCompras = 0;
 
 
@@ -202,6 +199,7 @@ let cantidadCompras = 0;
 function cargarProductos(productos) {
   contenedorProductos.innerHTML = "";
   productos.forEach((producto) => {
+    
     const div = document.createElement("div");
     div.classList.add("product");
     div.innerHTML = `
@@ -217,43 +215,7 @@ function cargarProductos(productos) {
   actualizarBtnAgregar();
 }
 
-// funcion que muestra los productos en el carrito cuando se agregan
-function cargarProductosCarrito() {
-  contenedorProductosCarrito.innerHTML = "";
-  productosEnCarrito = recuperarCarritoStorage();
-  console.log(productosEnCarrito);
-  
-  productosEnCarrito.forEach((producto) => {
-    const div = document.createElement("div");
-    div.classList.add("products-cart");
 
-    div.innerHTML = `
-    <div class="product-cart">
-    <img class="product-cart-img" src="${producto.imagen}" alt="${producto.titulo}">
-    <div class="product-cart-title">
-      <small>Producto</small>
-      <h3>${producto.titulo}</h3>
-    </div>
-    <div class="product-cart-quantity">
-      <small>Cantidad</small>
-      <p>${producto.cantidad}</p>
-    </div>
-    <div class="product-cart-price">
-      <small>Precio</small>
-      <p>${producto.precio}</p>
-    </div>
-    <div class="product-cart-subtotal">
-        <small>Subtotal</small>
-        <p>${producto.precio*producto.cantidad}</p>
-    </div>
-    <div>
-      <button class="delete-product-cart"><i class="bi bi-trash3"></i></button>
-    </div>
-  </div>
-    `;
-    contenedorProductosCarrito.append(div);
-  });
-}
 
 // Carga Inicial de todos los productos
 cargarProductos(productos);
@@ -313,15 +275,9 @@ function actualizarNumeroCarrito() {
   cantidadCompras++;
   numeroCantidadCompras.innerHTML = cantidadCompras;
   numeroCantidadCompras.classList.remove("disabled");
-  localStorage.setItem("cantidad-Compras", JSON.stringify(cantidadCompras));
+  localStorage.setItem("cantidad-compras", JSON.stringify(cantidadCompras));
 }
 
 function guardarCarritoStorage(carrito) {
   localStorage.setItem("carrito", JSON.stringify(carrito));
-}
-
-function recuperarCarritoStorage() {
-  let productos = JSON.parse(localStorage.getItem("carrito"));
-  return productos;
-  
 }
