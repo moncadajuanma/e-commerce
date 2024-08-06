@@ -185,19 +185,18 @@ const productos = [
   },
 ];
 
-const contenedorProductosCarrito = document.getElementById("products-cart");
-const contenedorProductos = document.getElementById("products-container");
-const botonesCategorias = document.querySelectorAll(".btn-category");
-const cantidadCompras = document.getElementById("cantidad-compras"); //numerito carrito
-const precioTotal = document.getElementById("total-price");
-const carritoVacio = document.getElementById("empty-car");
-const eventosCar = document.getElementById("events-car");
+const contenedorProductosCarrito = document.getElementById("products-cart"); //container del carrito
+const numeroCantidadCompras = document.getElementById("cantidad-compras");  //numerito carrito
+let contenedorProductos = document.getElementById("products-container");  // container de productos
+const botonesCategorias = document.querySelectorAll(".btn-category");  //botones de menu categoria
+let botonesAgregar = document.querySelectorAll(".product-add");
+const precioTotal = document.getElementById("total-price");  
+const carritoVacio = document.getElementById("empty-cart");  //Notificacion de carrito vacio
+const eventosCar = document.getElementById("events-car");  
 const titulo = document.getElementById("main-title");
 const productosEnCarrito = [];
-let numeroComprasCarrito = 0;
-let botonesAgregar = [];
-let subtotal = 0;
-let total = 0;
+let cantidadCompras = 0;
+
 
 // Funcion que carga los todos los productos dependiendo la categoria que se seleccione
 function cargarProductos(productos) {
@@ -218,12 +217,16 @@ function cargarProductos(productos) {
   actualizarBtnAgregar();
 }
 
-// funcion que carga los productos en el carrito cuando se agregan
-function cargarProductosCarrito(productos) {
+// funcion que muestra los productos en el carrito cuando se agregan
+function cargarProductosCarrito() {
   contenedorProductosCarrito.innerHTML = "";
-  productos.forEach((producto) => {
+  productosEnCarrito = recuperarCarritoStorage();
+  console.log(productosEnCarrito);
+  
+  productosEnCarrito.forEach((producto) => {
     const div = document.createElement("div");
     div.classList.add("products-cart");
+
     div.innerHTML = `
     <div class="product-cart">
     <img class="product-cart-img" src="${producto.imagen}" alt="${producto.titulo}">
@@ -233,7 +236,7 @@ function cargarProductosCarrito(productos) {
     </div>
     <div class="product-cart-quantity">
       <small>Cantidad</small>
-      <p>${producto.cantidadCompras}</p>
+      <p>${producto.cantidad}</p>
     </div>
     <div class="product-cart-price">
       <small>Precio</small>
@@ -241,7 +244,7 @@ function cargarProductosCarrito(productos) {
     </div>
     <div class="product-cart-subtotal">
         <small>Subtotal</small>
-        <p>${subtotal}</p>
+        <p>${producto.precio*producto.cantidad}</p>
     </div>
     <div>
       <button class="delete-product-cart"><i class="bi bi-trash3"></i></button>
@@ -254,7 +257,7 @@ function cargarProductosCarrito(productos) {
 
 // Carga Inicial de todos los productos
 cargarProductos(productos);
-cargarProductosCarrito(productosEnCarrito);
+
 
 // Funcion para capturar los botones de agregar cada vez que se actualizan
 function actualizarBtnAgregar() {
@@ -266,54 +269,24 @@ function actualizarBtnAgregar() {
 
 // Funcion para agregar los productos al carrito
 function agregarAlCarrito(e) {
-  const idProducto = e.currentTarget.id;
+  const idBoton = e.currentTarget.id;
   const productoAgregado = productos.find(
-    (producto) => producto.id === idProducto
+    (producto) => producto.id === idBoton
   );
-  
-  if (productosEnCarrito) {
-    
-  } else {
-    
+  //Si el producto que se agrega ya existe en el carrito, se incrementa la cantidad en 1
+  if (productosEnCarrito.some((producto) => producto.id === idBoton)) {
+    const index = productosEnCarrito.findIndex(producto => producto.id === idBoton);
+    productosEnCarrito[index].cantidad++;
+    actualizarNumeroCarrito();
+    guardarCarritoStorage(productosEnCarrito);
   }
-  
-  productosEnCarrito.push(productoAgregado);
-  guardarCarritoStorage(productosEnCarrito);
+  else {  //si el producto no existe en el carrito, se agrega al array del carrito
+    productoAgregado.cantidad = 1;
+    productosEnCarrito.push(productoAgregado);
+    actualizarNumeroCarrito();
+    guardarCarritoStorage(productosEnCarrito);
+  }
 }
-
-function guardarCarritoStorage(carrito) {
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-}
-
-function recuperarCarritoStorage() {
-  productosEnCarrito = JSON.parse(localStorage.getItem("carrito"));
-}
-
-function actualizarNotficacionCarrito() {
-  numeroComprasCarrito = numeroComprasCarrito + 1;
-  cantidadCompras.innerHTML = numeroComprasCarrito;
-  cantidadCompras.classList.remove("disabled");
-  carritoVacio.classList.remove("disabled");
-}
-
-// function vaciarCarrito() {
-//   localStorage.clear();
-//   cantidadCompras = 0
-//   cantidadCompras.innerText = 0
-//   cantidadCompras.classList.add("disabled")
-// }
-
-// function eliminarProductoCarrito(e, carrito) {
-//   const idProducto = e.currentTarget.id;
-//   const productoAEliminar = carrito.find(
-//     (producto) => producto.id === idProducto
-//   );
-//   numeroComprasCarrito = numeroComprasCarrito + 1;
-//   cantidadCompras.innerHTML = numeroComprasCarrito;
-//   localStorage.removeItem("productoAEliminar");
-// }
-
-// botonesEliminar.forEach();
 
 // Evento para escuchar los botones de menu y mostrar las categorias
 botonesCategorias.forEach((boton) => {
@@ -335,3 +308,20 @@ botonesCategorias.forEach((boton) => {
     }
   });
 });
+
+function actualizarNumeroCarrito() {
+  cantidadCompras++;
+  numeroCantidadCompras.innerHTML = cantidadCompras;
+  numeroCantidadCompras.classList.remove("disabled");
+  localStorage.setItem("cantidad-Compras", JSON.stringify(cantidadCompras));
+}
+
+function guardarCarritoStorage(carrito) {
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+function recuperarCarritoStorage() {
+  let productos = JSON.parse(localStorage.getItem("carrito"));
+  return productos;
+  
+}
