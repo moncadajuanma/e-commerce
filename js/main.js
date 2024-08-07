@@ -192,10 +192,10 @@ const botonesCategorias = document.querySelectorAll(".btn-category");  //botones
 let botonesAgregar = document.querySelectorAll(".product-add");
 const titulo = document.querySelector("#main-title");
 let productosEnCarrito = [];
-let cantidadCompras = 0;
+let cantidadCompras;
 
 let carritoLocalStorage = JSON.parse(localStorage.getItem("carrito"));
-let numeritoLocalStorage = JSON.parse(localStorage.getItem("carrito"));
+let numeritoLocalStorage = JSON.parse(localStorage.getItem("cantidad-compras"));
 
 if (carritoLocalStorage) {
   productosEnCarrito = carritoLocalStorage;
@@ -217,7 +217,7 @@ function cargarProductos(productos) {
     <div class="product-datail">
       <h3 class="product-title">${producto.titulo}</h3>
       <p class="product-price">$ ${producto.precio.toLocaleString("es-CO")} COP</p>
-      <button class="product-add" id="${producto.id}" >Agregar</button>
+      <button class="product-add" id="${producto.id}" >Agregar al Carrito</button>
     </div>
     `;
     contenedorProductos.append(div);
@@ -275,6 +275,7 @@ function agregarAlCarrito(e) {
   localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
 }
 
+// Funcion que me acumula las compras y las muestra en la notificacion del carrito
 function actualizarNumeroCarrito() {
   let numerito = productosEnCarrito.reduce((acumulador, producto) => acumulador + producto.cantidad, 0);
   numeroCantidadCompras.innerHTML = numerito;

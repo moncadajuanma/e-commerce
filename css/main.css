@@ -94,8 +94,18 @@ aside {
   transform: rotate(0.25turn);
 }
 
+.li-btn-cart {
+  display: flex;
+  flex-direction: column;
+}
+
 .btn-cart {
-  margin-top: 5rem;
+  display: flex;
+  padding: 0.5rem 1rem;
+}
+
+.bi-cart-plus {
+  font-size: 1.5rem;
 }
 
 .cantidad-compras {
@@ -117,6 +127,11 @@ aside {
 .cantidad-compras:hover {
   transform: scale(1.2);
   transition: 0.3s;
+}
+
+.resultado-total-compra {
+  padding: 0 1.5rem;
+  font-size: 0.80rem;
 }
 
 span {
@@ -255,7 +270,7 @@ border-radius: 1rem;
   font-size: 1rem;
 }
 
-.delete-product-cart {
+.delete-product {
   border: 0;
   background-color: var(--color-main2);
   color: var(--color-alert);
@@ -263,7 +278,7 @@ border-radius: 1rem;
   font-size: 1rem;
 }
 
-.delete-product-cart:hover {
+.delete-product:hover {
   transform:scale(1.2);
   transition: .3s;
 }
