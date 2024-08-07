@@ -11,10 +11,10 @@
 
   <body>
     
-    <div class="wrapper">
+    <div class="wrapper" id="wrapper">
       <aside>
         <header>
-          <h1 class="logo">Merca<span>Shop</span></h1>
+          <h1 class="logo" id="logo">Merca<span>Shop</span></h1>
         </header>
         <nav>
           <ul>
@@ -31,75 +31,33 @@
           </ul>
         </nav>
         <footer>
-          <p class="text-footer">© 2024 Juan M Moncada</p>
+          <p class="text-footer" id="text-footer">© 2024 Juan M Moncada</p>
         </footer>
       </aside>
       <main>
-        <h2 class="main-title">Tu Carrito</h2>
-        <div class="cart-container">
+        <h2 class="main-title" id="main-title">Tu Carrito</h2>
+        <div class="cart-container" id="cart-container">
           <p class="empty-cart" id="empty-cart">Tu carrito esta vacio <i class="bi bi-emoji-frown"></i></p>
-          <div class="products-cart ">
-            <!-- <div class="product-cart ">
-              <img class="product-cart-img" src="img/abrigos/01.jpg" alt="">
-              <div class="product-cart-title">
-                <small>Producto</small>
-                <h3>Abrigo 01</h3>
-              </div>
-              <div class="product-cart-quantity">
-                <small>Cantidad</small>
-                <p>1</p>
-              </div>
-              <div class="product-cart-price">
-                <small>Precio</small>
-                <p>100.000</p>
-              </div>
-              <div class="product-cart-subtotal">
-                  <small>Subtotal</small>
-                  <p>100.000</p>
-              </div>
-              <div>
-                <button class="delete-product-cart"><i class="bi bi-trash3"></i></button>
-              </div>
-            </div> -->
-            <!-- <div class="product-cart">
-              <img class="product-cart-img" src="img/abrigos/01.jpg" alt="">
-              <div class="product-cart-title">
-                <small>Producto</small>
-                <h3>Abrigo 01</h3>
-              </div>
-              <div class="product-cart-quantity">
-                <small>Cantidad</small>
-                <p>1</p>
-              </div>
-              <div class="product-cart-price">
-                <small>Precio</small>
-                <p>100.000</p>
-              </div>
-              <div class="product-cart-subtotal">
-                  <small>Subtotal</small>
-                  <p>100.000</p>
-              </div>
-              <div>
-                <button class="delete-product-cart"><i class="bi bi-trash3"></i></button>
-              </div>
-            </div> -->
-          <div class="events-cart disabled">
-            <div class="btn-drop">
-              <button class="drop-cart">Vaciar Carrito</button>
+          <div class="products-cart" id="products-cart">
+            <!-- Se completa desde JS -->
+          </div>  
+          <div class="events-cart disabled" id="events-cart">
+            <div class="btn-drop" id="btn-drop">
+              <button class="drop-cart" id="drop-cart">Vaciar Carrito</button>
             </div>
-            <div class="total-price">
-              <div class="total">
-                <p>Total</p>
-                <p id="total">$ 200.000</p>
+            <div class="total-price" id="total-price">
+              <div class="total" id="total">
+                <p>Total $ COP</p>
+                <p class="amount-total" id="amount-total"> </p>
               </div>
-              <button class="btn-buy">Comprar Ahora</button>
+              <button class="btn-buy" id="btn-buy">Comprar Ahora</button>
             </div>
           </div>
-          <p class="buy-sucess disabled">¡Muchas gracias por tu compra! <i class="bi bi-emoji-smile"></i></p>
+          <p class="buy-sucess disabled" id="buy-sucess">¡Muchas gracias por tu compra! <i class="bi bi-emoji-smile"></i></p>
         </div>
       </main>
     </div>
-    <script src="js/main.js"></script>
-    <script src="js/carrito.js"></script>
-  </body>
+      <script src="js/main.js"></script>
+      <script src="js/carrito.js"></script>
+    </body>
 </html>

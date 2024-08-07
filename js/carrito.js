@@ -1,16 +1,33 @@
 
-numeroCantidadCompras = JSON.parse(localStorage.getItem("cantidad-compras"))
-productosEnCarrito = JSON.parse(localStorage.getItem("carrito"));
-const eventosCarrito = document.getElementById("events-car");
-const precioTotal = document.getElementById("total-price");  
-const carritoVacio = document.getElementById("empty-cart");  //Notificacion de carrito vacio
+const numeritoCompras = JSON.parse(localStorage.getItem("cantidad-compras"))
+const carrito = JSON.parse(localStorage.getItem("carrito"));
+const eventosCarrito = document.querySelector(".events-cart");
+const precioTotal = document.querySelector("#amount-total");  
+const carritoVacio = document.querySelector("#empty-cart");
+const vaciarCarrito = document.querySelector("#drop-cart");
+
+if (carrito) {
+  carritoVacio.classList.add("disabled");
+  eventosCarrito.classList.remove("disabled");
+  
+  cargarProductosCarrito(carrito);
+  totalizarCompra(carrito);
+
+} else {
+  carritoVacio.classList.remove("disabled");
+  eventosCarrito.classList.add("disabled");
+}
+
+function totalizarCompra() {
+  let totalCompra = carrito.reduce((acumulador, producto) => acumulador + producto.precio * producto.cantidad, 0);
+  precioTotal.innerHTML = totalCompra.toLocaleString("es-CO");
+}
 
 
 // funcion que muestra los productos en el carrito cuando se agregan
-function cargarProductosCarrito(productosEnCarrito) {
+function cargarProductosCarrito(productos) {
   contenedorProductosCarrito.innerHTML = "";
-
-  productosEnCarrito.forEach((producto) => {
+  productos.forEach((producto) => {
     const div = document.createElement("div");
     div.classList.add("products-cart");
 
@@ -27,14 +44,14 @@ function cargarProductosCarrito(productosEnCarrito) {
       </div>
       <div class="product-cart-price">
         <small>Precio</small>
-        <p>${producto.precio}</p>
+        <p>${producto.precio.toLocaleString("es-CO")} COP</p>
       </div>
       <div class="product-cart-subtotal">
           <small>Subtotal</small>
-          <p>${producto.precio * producto.cantidad}</p>
+          <p>${(producto.precio * producto.cantidad).toLocaleString("es-CO")} COP</p>
       </div>
       <div>
-        <button class="delete-product-cart"><i class="bi bi-trash3"></i></button>
+        <button class="delete-product-cart" id="${producto.id}"><i class="bi bi-trash3"></i></button>
       </div>
     </div>
       `;
@@ -42,26 +59,9 @@ function cargarProductosCarrito(productosEnCarrito) {
   });
 }
 
-// mostrarProductoCarrito();
-
-
-if (numeroCantidadCompras > 0) {
-  mostrarProductoCarrito()
-} else {
+vaciarCarrito.addEventListener("click", () => { localStorage.clear();
   carritoVacio.classList.remove("disabled");
+  eventosCarrito.classList.add("disabled");
+  contenedorProductosCarrito.classList.add("disabled");
   numeroCantidadCompras.classList.add("disabled");
-  contenedorProductosCarrito.classList.add("disabled")
-  eventosCarrito.classList.add("disabled")
-  numeroCantidadCompras.innerText = numeroCantidadCompras;
-}
-
-function mostrarProductoCarrito() {
-  carritoVacio.classList.add("disabled");
-  numeroCantidadCompras.classList.remove("disabled");
-  contenedorProductosCarrito.classList.remove("disabled")
-  eventosCarrito.classList.remove("disabled")
-  numeroCantidadCompras.innerText = numeroCantidadCompras;
-}
-
-console.log(productosEnCarrito);
-console.log(numeroCantidadCompras);
+})

@@ -100,16 +100,17 @@ aside {
 
 .cantidad-compras {
   background-color: var(--color-alert);
+  border: 2px solid var(--color-alert);
   color: var(--color-main3);
   padding: .3rem;
   border-radius: 5rem;
   width: 2rem;
   height: 2rem;
-  border: 2px solid var(--color-main3);
 }
 
 .btn-cart.active .cantidad-compras {
-  background-color: var(--color-background1);
+  background-color: var(--color-alert);
+  border: 2px solid var(--color-alert);
   color: var(--color-main3);
 }
 
@@ -269,7 +270,9 @@ border-radius: 1rem;
 
 .events-cart {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  margin-top: 3rem;
 }
 
 .drop-cart {
@@ -287,7 +290,7 @@ border-radius: 1rem;
   transform: scale(1.01);
   transition: 0.3s;
   background-color: var(--color-background1);
-  color: var(--color-sucessful);
+  color: var(--color-alert);
 }
 
 .total-price {
@@ -296,6 +299,7 @@ border-radius: 1rem;
 
 .total {
   display: flex;
+  align-items: center;
   background-color: var(--color-main2);
   color: var(--color-background1);
   border: 0;
@@ -310,7 +314,7 @@ border-radius: 1rem;
 
 .btn-buy {
   border: 0;
-  padding: 1rem;
+  padding: 0.5rem;
   background-color: var(--color-background1);
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
