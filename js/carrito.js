@@ -3,21 +3,21 @@ const numeritoCompras = JSON.parse(localStorage.getItem("cantidad-compras"))
 const notificacionCompraExitosa = document.querySelector("#buy-sucess");
 let botonesEliminar = document.querySelectorAll(".delete-product");
 const eventosCarrito = document.querySelector(".events-cart");
-const precioTotal = document.querySelector("#amount-total");  
+const precioTotal = document.querySelector("#amount-total");
 const carritoVacio = document.querySelector("#empty-cart");
 const vaciarCarrito = document.querySelector("#drop-cart");
 const comprarCarrito = document.querySelector("#btn-buy");
 
 
 
-const carrito = JSON.parse(localStorage.getItem("carrito"));
+// const carrito = JSON.parse(localStorage.getItem("carrito")); // NO HACE FALTA, porque se puede utilizar variables de otros archivos.
 
 
-if (carrito) {
+if (productosEnCarrito) {
   carritoVacio.classList.add("disabled");
   eventosCarrito.classList.remove("disabled");
-  cargarProductosCarrito(carrito);
-  totalizarCompra(carrito);
+  cargarProductosCarrito(productosEnCarrito);
+  totalizarCompra(productosEnCarrito);
 
 } else {
   carritoVacio.classList.remove("disabled");
@@ -25,7 +25,7 @@ if (carrito) {
 }
 
 function totalizarCompra() {
-  let totalCompra = carrito.reduce((acumulador, producto) => acumulador + producto.precio * producto.cantidad, 0);
+  let totalCompra = productosEnCarrito.reduce((acumulador, producto) => acumulador + producto.precio * producto.cantidad, 0);
   precioTotal.innerHTML = totalCompra.toLocaleString("es-CO");
   localStorage.setItem("total-compra", JSON.stringify(totalCompra));
 }
@@ -46,8 +46,10 @@ function cargarProductosCarrito(productos) {
       </div>
       <div class="product-cart-quantity">
         <small>Cantidad</small>
+        <button id="sum-${producto.id}">+</button>
         <p>${producto.cantidad}</p>
-      </div>
+        <button id="res-${producto.id}">-</button>
+        </div>
       <div class="product-cart-price">
         <small>Precio</small>
         <p>${producto.precio.toLocaleString("es-CO")} COP</p>
@@ -66,14 +68,16 @@ function cargarProductosCarrito(productos) {
   actualizarBtnEliminar();
 }
 
-vaciarCarrito.addEventListener("click", () => { localStorage.clear();
+vaciarCarrito.addEventListener("click", () => {
+  localStorage.clear();
   carritoVacio.classList.remove("disabled");
   eventosCarrito.classList.add("disabled");
   contenedorProductosCarrito.classList.add("disabled");
   numeroCantidadCompras.classList.add("disabled");
 })
 
-comprarCarrito.addEventListener("click", () => { localStorage.clear();
+comprarCarrito.addEventListener("click", () => {
+  localStorage.clear();
   notificacionCompraExitosa.classList.remove("disabled");
   eventosCarrito.classList.add("disabled");
   contenedorProductosCarrito.classList.add("disabled");
@@ -87,24 +91,20 @@ function actualizarBtnEliminar() {
   });
 }
 
-// function EliminarDelCarrito() {
-//   const idBoton = e.currentTarget.id;
-//   const productoAEliminar = carrito.find(
-//     (producto) => producto.id === idBoton
-//   );
-//   //Si el producto que se elimina tiene cantidad mayor que 1, se disminuye la cantidad en 1
-//   if (carrito.some((producto) => producto.id === idBoton)) {
-//     const index = carrito.findIndex(producto => producto.cantidad === idBoton);
-//     carrito[index].cantidad--;
-//     cantidadCompras--;
+function EliminarDelCarrito(e) {
+  const idBoton = e.currentTarget.id;
+  const productoAEliminar = productosEnCarrito.find(
+    (producto) => producto.id === idBoton
+  );
+  //Si el producto que se elimina tiene cantidad mayor que 1, se disminuye la cantidad en 1
+  if (productosEnCarrito.some((producto) => producto.id === idBoton)) {
+    const index = productosEnCarrito.findIndex(producto => producto.id === productoAEliminar.id);
+    //eliminamos el elemento del carrito
+    productosEnCarrito.splice(index, 1)
 
-//   }
-//   else {  //si el producto no existe en el carrito, se agrega al array del carrito
-//     productoAgregado.cantidad = 1;
-//     productosEnCarrito.push(productoAgregado);
-//     cantidadCompras++;
-//   }
-//   actualizarNumeroCarrito();
-//   localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
-// }
-// }
+    localStorage.setItem('cantidad-compras', JSON.stringify(productosEnCarrito.length)) // actualizamos
+    localStorage.setItem('carrito', JSON.stringify(productosEnCarrito)) // Eliminamos el elemento del localstorage
+    cargarProductosCarrito(productosEnCarrito) //cargamos de nuevo el carrito
+    actualizarNumeroCarrito() //Actualizamos el numero de carrito
+  }
+}
