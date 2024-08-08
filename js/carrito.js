@@ -1,31 +1,30 @@
-
-const numeritoCompras = JSON.parse(localStorage.getItem("cantidad-compras"))
+const numeritoCompras = JSON.parse(localStorage.getItem("cantidad-compras"));
 const notificacionCompraExitosa = document.querySelector("#buy-sucess");
 let botonesEliminar = document.querySelectorAll(".delete-product");
 const eventosCarrito = document.querySelector(".events-cart");
 const precioTotal = document.querySelector("#amount-total");
-const carritoVacio = document.querySelector("#empty-cart");
+const notificacionCarritoVacio = document.querySelector("#empty-cart");
 const vaciarCarrito = document.querySelector("#drop-cart");
 const comprarCarrito = document.querySelector("#btn-buy");
 
-
-
 // const carrito = JSON.parse(localStorage.getItem("carrito")); // NO HACE FALTA, porque se puede utilizar variables de otros archivos.
 
-
 if (productosEnCarrito) {
-  carritoVacio.classList.add("disabled");
+  notificacionCarritoVacio.classList.add("disabled");
   eventosCarrito.classList.remove("disabled");
   cargarProductosCarrito(productosEnCarrito);
   totalizarCompra(productosEnCarrito);
-
 } else {
-  carritoVacio.classList.remove("disabled");
+  notificacionCarritoVacio.classList.remove("disabled");
   eventosCarrito.classList.add("disabled");
 }
 
+// Funcion que busca los subtotales de cada procto y los suma]
 function totalizarCompra() {
-  let totalCompra = productosEnCarrito.reduce((acumulador, producto) => acumulador + producto.precio * producto.cantidad, 0);
+  let totalCompra = productosEnCarrito.reduce(
+    (acumulador, producto) => acumulador + producto.precio * producto.cantidad,
+    0
+  );
   precioTotal.innerHTML = totalCompra.toLocaleString("es-CO");
   localStorage.setItem("total-compra", JSON.stringify(totalCompra));
 }
@@ -39,7 +38,9 @@ function cargarProductosCarrito(productos) {
 
     div.innerHTML = `
       <div class="product-cart">
-      <img class="product-cart-img" src="${producto.imagen}" alt="${producto.titulo}">
+      <img class="product-cart-img" src="${producto.imagen}" alt="${
+      producto.titulo
+    }">
       <div class="product-cart-title">
         <small>Producto</small>
         <h3>${producto.titulo}</h3>
@@ -56,10 +57,14 @@ function cargarProductosCarrito(productos) {
       </div>
       <div class="product-cart-subtotal">
           <small>Subtotal</small>
-          <p>${(producto.precio * producto.cantidad).toLocaleString("es-CO")} COP</p>
+          <p>${(producto.precio * producto.cantidad).toLocaleString(
+            "es-CO"
+          )} COP</p>
       </div>
       <div>
-        <button class="delete-product" id="${producto.id}"><i class="bi bi-trash3"></i></button>
+        <button class="delete-product" id="${
+          producto.id
+        }"><i class="bi bi-trash3"></i></button>
       </div>
     </div>
       `;
@@ -68,21 +73,22 @@ function cargarProductosCarrito(productos) {
   actualizarBtnEliminar();
 }
 
+// Funcion que me elimina todo del carrito
 vaciarCarrito.addEventListener("click", () => {
   localStorage.clear();
-  carritoVacio.classList.remove("disabled");
+  notificacionCarritoVacio.classList.remove("disabled");
   eventosCarrito.classList.add("disabled");
   contenedorProductosCarrito.classList.add("disabled");
   numeroCantidadCompras.classList.add("disabled");
-})
+});
 
+// Funcion que simula la compra de lo que hay en el carrito
 comprarCarrito.addEventListener("click", () => {
   localStorage.clear();
   notificacionCompraExitosa.classList.remove("disabled");
   eventosCarrito.classList.add("disabled");
   contenedorProductosCarrito.classList.add("disabled");
-  numeroCantidadCompras.classList.add("disabled");
-})
+});
 
 function actualizarBtnEliminar() {
   botonesEliminar = document.querySelectorAll(".delete-product");
@@ -96,15 +102,24 @@ function EliminarDelCarrito(e) {
   const productoAEliminar = productosEnCarrito.find(
     (producto) => producto.id === idBoton
   );
-  //Si el producto que se elimina tiene cantidad mayor que 1, se disminuye la cantidad en 1
   if (productosEnCarrito.some((producto) => producto.id === idBoton)) {
-    const index = productosEnCarrito.findIndex(producto => producto.id === productoAEliminar.id);
+    const index = productosEnCarrito.findIndex(
+      (producto) => producto.id === productoAEliminar.id
+    );
     //eliminamos el elemento del carrito
-    productosEnCarrito.splice(index, 1)
-
-    localStorage.setItem('cantidad-compras', JSON.stringify(productosEnCarrito.length)) // actualizamos
-    localStorage.setItem('carrito', JSON.stringify(productosEnCarrito)) // Eliminamos el elemento del localstorage
-    cargarProductosCarrito(productosEnCarrito) //cargamos de nuevo el carrito
-    actualizarNumeroCarrito() //Actualizamos el numero de carrito
-  }
+    productosEnCarrito.splice(index, 1);
+        
+    localStorage.setItem("cantidad-compras", JSON.stringify(productosEnCarrito.length)); // actualizamos
+    localStorage.setItem("carrito", JSON.stringify(productosEnCarrito)); // Eliminamos el elemento del localstorage
+    cargarProductosCarrito(productosEnCarrito); //cargamos de nuevo el carrito
+    actualizarNumeroCarrito(); //Actualizamos el numero de carrito
+    totalizarCompra();
+    if(!productosEnCarrito.length) {
+      notificacionCarritoVacio.classList.remove("disabled")
+      eventosCarrito.classList.add("disabled");
+    }
+  } 
 }
+
+
+
