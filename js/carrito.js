@@ -1,4 +1,3 @@
-const numeritoCompras = JSON.parse(localStorage.getItem("cantidad-compras"));
 const notificacionCompraExitosa = document.querySelector("#buy-sucess");
 let botonesEliminar = document.querySelectorAll(".delete-product");
 const eventosCarrito = document.querySelector(".events-cart");
@@ -7,16 +6,17 @@ const notificacionCarritoVacio = document.querySelector("#empty-cart");
 const vaciarCarrito = document.querySelector("#drop-cart");
 const comprarCarrito = document.querySelector("#btn-buy");
 
-// const carrito = JSON.parse(localStorage.getItem("carrito")); // NO HACE FALTA, porque se puede utilizar variables de otros archivos.
+const numeritoCompras = JSON.parse(localStorage.getItem("cantidad-compras"));
+const carrito = JSON.parse(localStorage.getItem("carrito")); // NO HACE FALTA, porque se puede utilizar variables de otros archivos.
 
-if (productosEnCarrito) {
+if (carrito) {
   notificacionCarritoVacio.classList.add("disabled");
   eventosCarrito.classList.remove("disabled");
   cargarProductosCarrito(productosEnCarrito);
   totalizarCompra(productosEnCarrito);
 } else {
-  notificacionCarritoVacio.classList.remove("disabled");
   eventosCarrito.classList.add("disabled");
+  notificacionCarritoVacio.classList.remove("disabled");
 }
 
 // Funcion que busca los subtotales de cada procto y los suma]
@@ -29,7 +29,7 @@ function totalizarCompra() {
   localStorage.setItem("total-compra", JSON.stringify(totalCompra));
 }
 
-// funcion que muestra los productos en el carrito cuando
+// funcion que carga los productos en el carrito cuando se agregarn
 function cargarProductosCarrito(productos) {
   contenedorProductosCarrito.innerHTML = "";
   productos.forEach((producto) => {
@@ -38,9 +38,7 @@ function cargarProductosCarrito(productos) {
 
     div.innerHTML = `
       <div class="product-cart">
-      <img class="product-cart-img" src="${producto.imagen}" alt="${
-      producto.titulo
-    }">
+      <img class="product-cart-img" src="${producto.imagen}" alt="${producto.titulo}">
       <div class="product-cart-title">
         <small>Producto</small>
         <h3>${producto.titulo}</h3>
@@ -57,20 +55,15 @@ function cargarProductosCarrito(productos) {
       </div>
       <div class="product-cart-subtotal">
           <small>Subtotal</small>
-          <p>${(producto.precio * producto.cantidad).toLocaleString(
-            "es-CO"
-          )} COP</p>
+          <p>${(producto.precio * producto.cantidad).toLocaleString("es-CO")} COP</p>
       </div>
       <div>
-        <button class="delete-product" id="${
-          producto.id
-        }"><i class="bi bi-trash3"></i></button>
+        <button class="delete-product" id="${producto.id}"><i class="bi bi-trash3"></i></button>
       </div>
-    </div>
-      `;
-    contenedorProductosCarrito.append(div);
+      </div>`;
+      contenedorProductosCarrito.append(div);
   });
-  actualizarBtnEliminar();
+  actualizarBotonEliminar();
 }
 
 // Funcion que me elimina todo del carrito
@@ -90,7 +83,8 @@ comprarCarrito.addEventListener("click", () => {
   contenedorProductosCarrito.classList.add("disabled");
 });
 
-function actualizarBtnEliminar() {
+// Funcion que captura los botones cada vez que se actaulizan
+function actualizarBotonEliminar() {
   botonesEliminar = document.querySelectorAll(".delete-product");
   botonesEliminar.forEach((boton) => {
     boton.addEventListener("click", EliminarDelCarrito);
