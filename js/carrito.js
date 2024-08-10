@@ -1,32 +1,25 @@
 const notificacionCompraExitosa = document.querySelector("#buy-sucess");
+const notificacionCarritoVacio = document.querySelector("#empty-cart");
 let botonesEliminar = document.querySelectorAll(".delete-product");
+let botonesRestar = document.querySelectorAll(".resta-producto");
+let botonesSumar = document.querySelectorAll(".suma-producto");
 const eventosCarrito = document.querySelector(".events-cart");
 const precioTotal = document.querySelector("#amount-total");
-const notificacionCarritoVacio = document.querySelector("#empty-cart");
 const vaciarCarrito = document.querySelector("#drop-cart");
 const comprarCarrito = document.querySelector("#btn-buy");
 
 const numeritoCompras = JSON.parse(localStorage.getItem("cantidad-compras"));
-const carrito = JSON.parse(localStorage.getItem("carrito")); // NO HACE FALTA, porque se puede utilizar variables de otros archivos.
+const carrito = JSON.parse(localStorage.getItem("carrito"));
 
 if (carrito) {
   notificacionCarritoVacio.classList.add("disabled");
   eventosCarrito.classList.remove("disabled");
-  cargarProductosCarrito(productosEnCarrito);
+  cargarProductosCarrito(carrito);
   totalizarCompra(productosEnCarrito);
 } else {
   eventosCarrito.classList.add("disabled");
   notificacionCarritoVacio.classList.remove("disabled");
-}
-
-// Funcion que busca los subtotales de cada procto y los suma]
-function totalizarCompra() {
-  let totalCompra = productosEnCarrito.reduce(
-    (acumulador, producto) => acumulador + producto.precio * producto.cantidad,
-    0
-  );
-  precioTotal.innerHTML = totalCompra.toLocaleString("es-CO");
-  localStorage.setItem("total-compra", JSON.stringify(totalCompra));
+  actualizarNumeroCarrito();
 }
 
 // funcion que carga los productos en el carrito cuando se agregarn
@@ -35,53 +28,45 @@ function cargarProductosCarrito(productos) {
   productos.forEach((producto) => {
     const div = document.createElement("div");
     div.classList.add("products-cart");
+    let titulo = producto.titulo
+    let cantidad = producto.cantidad
+    let precio = producto.precio
+    let subtotal = producto.precio * producto.cantidad
+    let id = producto.id
 
     div.innerHTML = `
       <div class="product-cart">
       <img class="product-cart-img" src="${producto.imagen}" alt="${producto.titulo}">
       <div class="product-cart-title">
         <small>Producto</small>
-        <h3>${producto.titulo}</h3>
+        <h3>${titulo}</h3>
       </div>
       <div class="product-cart-quantity">
         <small>Cantidad</small>
-        <button id="sum-${producto.id}">+</button>
-        <p>${producto.cantidad}</p>
-        <button id="res-${producto.id}">-</button>
+      <div class="quantity">
+        <button class="resta-producto" id="${id}">-</button>
+        <p>${cantidad}</p>
+        <button class="suma-producto" id="${id}">+</button>
+      </div>
         </div>
       <div class="product-cart-price">
         <small>Precio</small>
-        <p>${producto.precio.toLocaleString("es-CO")} COP</p>
+        <p>${precio.toLocaleString("es-CO")} COP</p>
       </div>
       <div class="product-cart-subtotal">
           <small>Subtotal</small>
-          <p>${(producto.precio * producto.cantidad).toLocaleString("es-CO")} COP</p>
+          <p>${(subtotal).toLocaleString("es-CO")} COP</p>
       </div>
       <div>
-        <button class="delete-product" id="${producto.id}"><i class="bi bi-trash3"></i></button>
+        <button class="delete-product" id="${id}"><i class="bi bi-trash3"></i></button>
       </div>
       </div>`;
       contenedorProductosCarrito.append(div);
   });
   actualizarBotonEliminar();
+  actualizarBotonRestar();
+  actualizarBotonSumar();
 }
-
-// Funcion que me elimina todo del carrito
-vaciarCarrito.addEventListener("click", () => {
-  localStorage.clear();
-  notificacionCarritoVacio.classList.remove("disabled");
-  eventosCarrito.classList.add("disabled");
-  contenedorProductosCarrito.classList.add("disabled");
-  numeroCantidadCompras.classList.add("disabled");
-});
-
-// Funcion que simula la compra de lo que hay en el carrito
-comprarCarrito.addEventListener("click", () => {
-  localStorage.clear();
-  notificacionCompraExitosa.classList.remove("disabled");
-  eventosCarrito.classList.add("disabled");
-  contenedorProductosCarrito.classList.add("disabled");
-});
 
 // Funcion que captura los botones cada vez que se actaulizan
 function actualizarBotonEliminar() {
@@ -91,11 +76,24 @@ function actualizarBotonEliminar() {
   });
 }
 
+function actualizarBotonRestar() {
+  botonesRestar = document.querySelectorAll(".resta-producto");
+  botonesRestar.forEach((boton) => {
+    boton.addEventListener("click", disminuirProducto);
+  });
+}
+
+function actualizarBotonSumar() {
+  botonesSumar = document.querySelectorAll(".suma-producto");
+  botonesSumar.forEach((boton) => {
+    boton.addEventListener("click", aumentarProducto);
+  });
+}
+
+// Funcion que me elimina un producto del carrito
 function EliminarDelCarrito(e) {
   const idBoton = e.currentTarget.id;
-  const productoAEliminar = productosEnCarrito.find(
-    (producto) => producto.id === idBoton
-  );
+  const productoAEliminar = productosEnCarrito.find((producto) => producto.id === idBoton);
   if (productosEnCarrito.some((producto) => producto.id === idBoton)) {
     const index = productosEnCarrito.findIndex(
       (producto) => producto.id === productoAEliminar.id
@@ -115,5 +113,75 @@ function EliminarDelCarrito(e) {
   } 
 }
 
+// Funcion que disminuye la cantidad del producto en el carrito de compras
+function disminuirProducto(e) {
+  const idBoton = e.currentTarget.id;
+  const productoADisminuir = productosEnCarrito.find((producto) => producto.id === idBoton);
+  if (productoADisminuir.cantidad > 0) {
+    productoADisminuir.cantidad--;
+    cantidadCompras--;
+    localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
+    actualizarNumeroCarrito();
+    totalizarCompra();
+    cargarProductosCarrito(productosEnCarrito);
+  }
+}
 
+// Funcion que aumenta la cantidad del producto en el carrito de compras
+function aumentarProducto(e) {
+  const idBoton = e.currentTarget.id;
+  const productoAAumentar = productosEnCarrito.find((producto) => producto.id === idBoton);
+  
+  if (productoAAumentar.cantidad >= 0) {
+    productoAAumentar.cantidad++;
+    cantidadCompras++;
+    localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
+    actualizarNumeroCarrito();
+    totalizarCompra();
+    cargarProductosCarrito(productosEnCarrito);
+  }
+}
+
+// Funcion que busca los subtotales de cada producto y los suma
+function totalizarCompra() {
+  let totalCompra = productosEnCarrito.reduce(
+    (acumulador, producto) => acumulador + producto.precio * producto.cantidad, 0);
+  precioTotal.innerHTML = totalCompra.toLocaleString("es-CO");
+  localStorage.setItem("total-compra", JSON.stringify(totalCompra));
+}
+
+// Funcion que me elimina todo del carrito
+function dropCart (numeritoCompras) {
+  localStorage.clear();
+  numeroCantidadCompras.innerHTML = numeritoCompras;
+  numeroCantidadCompras.classList.remove("disabled");
+  
+  actualizarNumeroCarrito();
+  // localStorage.setItem("cantidad-compras", JSON.stringify(numerito));
+}
+
+// Funcion que simula la compra de lo que hay en el carrito
+comprarCarrito.addEventListener("click", () => {
+  let compras = JSON.parse(localStorage.getItem("cantidad-compras"));
+  let valorCarrito = JSON.parse(localStorage.getItem("cantidad-compras"));
+  if (compras > 0 && valorCarrito > 0 ) {
+    localStorage.clear();
+    notificacionCompraExitosa.classList.remove("disabled");
+    eventosCarrito.classList.add("disabled");
+    contenedorProductosCarrito.classList.add("disabled");
+    numeroCantidadCompras.innerHTML = 0;
+    numeroCantidadCompras.classList.remove("disabled");
+    cargarProductosCarrito();
+  } else alert("Agregue al menos 1 cantidad de 1 producto")
+});
+
+// Funcion vacia el carrito por completo eliminando el localstorage
+vaciarCarrito.addEventListener("click", () => {
+  localStorage.clear();
+  numeroCantidadCompras.innerHTML = 0;
+  numeroCantidadCompras.classList.remove("disabled");
+  eventosCarrito.classList.add("disabled");
+  notificacionCarritoVacio.classList.remove("disabled");
+  cargarProductosCarrito();
+});
 

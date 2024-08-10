@@ -17,6 +17,7 @@ if (carritoLocalStorage) {
   cargarProductos(productos);
 } else {
   cargarProductos(productos);
+  actualizarNumeroCarrito();
 }
 
 // Funcion que carga los todos los productos dependiendo la categoria que se seleccione
@@ -70,9 +71,7 @@ botonesCategorias.forEach((boton) => {
 // Funcion para agregar los productos al carrito
 function agregarAlCarrito(e) {
   const idBoton = e.currentTarget.id;
-  const productoAgregado = productos.find(
-    (producto) => producto.id === idBoton
-  );
+  const productoAgregado = productos.find((producto) => producto.id === idBoton);
   //Si el producto que se agrega ya existe en el carrito, se incrementa la cantidad en 1
   if (productosEnCarrito.some((producto) => producto.id === idBoton)) {
     const index = productosEnCarrito.findIndex(producto => producto.id === idBoton);
