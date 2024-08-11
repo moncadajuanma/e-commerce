@@ -1,5 +1,5 @@
 const contenedorProductosCarrito = document.querySelector("#products-cart"); //container del carrito
-let numeroCantidadCompras = document.querySelector("#cantidad-compras");  //numerito carrito
+let numeroCantidadCompras = document.querySelector(".cantidad-compras");  //numerito carrito
 let contenedorProductos = document.querySelector("#products-container");  // container de productos
 const botonesCategorias = document.querySelectorAll(".btn-category");  //botones de menu categoria
 let botonesAgregar = document.querySelectorAll(".product-add");
@@ -30,7 +30,7 @@ function cargarProductos(productos) {
     <img class="product-img" src="${producto.imagen}" alt="${producto.imagen}">
     <div class="product-datail">
       <h3 class="product-title">${producto.titulo}</h3>
-      <p class="product-price">$ ${producto.precio.toLocaleString("es-CO")} COP</p>
+      <p class="product-price">$ ${producto.precio.toLocaleString("es-CO")}</p>
       <button class="product-add" id="${producto.id}" >Agregar al Carrito</button>
     </div>
     `;

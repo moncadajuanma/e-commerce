@@ -460,6 +460,10 @@ border-radius: 1rem;
     padding: 1.5rem;
   }
 
+  .main-title {
+    font-size: 1.5rem;
+  }
+
   .products-container {
     grid-template-columns: 1fr 1fr;
   }
@@ -507,6 +511,13 @@ border-radius: 1rem;
 
 .events-cart {
   margin-top: 0;
+  align-content: center;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+.total,
+.drop-cart,
+.btn-buy {
+  font-size: 0.8rem;
 }

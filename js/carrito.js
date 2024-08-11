@@ -54,11 +54,11 @@ function cargarProductosCarrito(productos) {
         </div>
       <div class="product-cart-price">
         <small>Precio</small>
-        <p>${producto.precio.toLocaleString("es-CO")} COP</p>
+        <p>$ ${producto.precio.toLocaleString("es-CO")}</p>
       </div>
       <div class="product-cart-subtotal">
           <small>Subtotal</small>
-          <p>${(producto.precio * producto.cantidad).toLocaleString("es-CO")} COP</p>
+          <p>$ ${(producto.precio * producto.cantidad).toLocaleString("es-CO")}</p>
       </div>
       <div>
         <button class="delete-product" id="${producto.id}"><i class="bi bi-trash3"></i></button>
@@ -153,7 +153,7 @@ function aumentarProducto(e) {
 function totalizarCompra() {
   let totalCompra = productosEnCarrito.reduce(
     (acumulador, producto) => acumulador + producto.precio * producto.cantidad, 0);
-  precioTotal.innerHTML = totalCompra.toLocaleString("es-CO");
+  precioTotal.innerHTML = "$ " + totalCompra.toLocaleString("es-CO");
   localStorage.setItem("total-compra", JSON.stringify(totalCompra));
 }
 
