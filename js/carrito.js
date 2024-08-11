@@ -11,16 +11,21 @@ const imagenEmpty = document.getElementById("img-empty");
 const imagenFull = document.getElementById("img-full");
 
 const numeritoCompras = JSON.parse(localStorage.getItem("cantidad-compras"));
-const carrito = JSON.parse(localStorage.getItem("carrito"));
+const carritoLS = JSON.parse(localStorage.getItem("carrito"));
 
-if (carrito) {
+
+if (carritoLS) {
   notificacionCarritoVacio.classList.add("disabled");
+  contenedorProductosCarrito.classList.remove("disabled");
   eventosCarrito.classList.remove("disabled");
-  cargarProductosCarrito(carrito);
+  notificacionCompraExitosa.classList.add("disabled");
+  cargarProductosCarrito(carritoLS);
   totalizarCompra(productosEnCarrito);
 } else {
-  eventosCarrito.classList.add("disabled");
   notificacionCarritoVacio.classList.remove("disabled");
+  contenedorProductosCarrito.classList.add("disabled");
+  eventosCarrito.classList.add("disabled");
+  notificacionCompraExitosa.classList.add("disabled");
   imagenEmpty.classList.remove("disabled");
   actualizarNumeroCarrito();
 }
@@ -31,37 +36,32 @@ function cargarProductosCarrito(productos) {
   productos.forEach((producto) => {
     const div = document.createElement("div");
     div.classList.add("products-cart");
-    let titulo = producto.titulo
-    let cantidad = producto.cantidad
-    let precio = producto.precio
-    let subtotal = producto.precio * producto.cantidad
-    let id = producto.id
-
+    
     div.innerHTML = `
       <div class="product-cart">
       <img class="product-cart-img" src="${producto.imagen}" alt="${producto.titulo}">
       <div class="product-cart-title">
         <small>Producto</small>
-        <h3>${titulo}</h3>
+        <h3>${producto.titulo}</h3>
       </div>
       <div class="product-cart-quantity">
         <small>Cantidad</small>
       <div class="quantity">
-        <button class="resta-producto" id="${id}">-</button>
-        <p>${cantidad}</p>
-        <button class="suma-producto" id="${id}">+</button>
+        <button class="resta-producto" id="${producto.id}">-</button>
+        <p>${producto.cantidad}</p>
+        <button class="suma-producto" id="${producto.id}">+</button>
       </div>
         </div>
       <div class="product-cart-price">
         <small>Precio</small>
-        <p>${precio.toLocaleString("es-CO")} COP</p>
+        <p>${producto.precio.toLocaleString("es-CO")} COP</p>
       </div>
       <div class="product-cart-subtotal">
           <small>Subtotal</small>
-          <p>${(subtotal).toLocaleString("es-CO")} COP</p>
+          <p>${(producto.precio * producto.cantidad).toLocaleString("es-CO")} COP</p>
       </div>
       <div>
-        <button class="delete-product" id="${id}"><i class="bi bi-trash3"></i></button>
+        <button class="delete-product" id="${producto.id}"><i class="bi bi-trash3"></i></button>
       </div>
       </div>`;
       contenedorProductosCarrito.append(div);
@@ -75,7 +75,7 @@ function cargarProductosCarrito(productos) {
 function actualizarBotonEliminar() {
   botonesEliminar = document.querySelectorAll(".delete-product");
   botonesEliminar.forEach((boton) => {
-    boton.addEventListener("click", EliminarDelCarrito);
+    boton.addEventListener("click", eliminarDelCarrito);
   });
 }
 
@@ -94,7 +94,7 @@ function actualizarBotonSumar() {
 }
 
 // Funcion que me elimina un producto del carrito
-function EliminarDelCarrito(e) {
+function eliminarDelCarrito(e) {
   const idBoton = e.currentTarget.id;
   const productoAEliminar = productosEnCarrito.find((producto) => producto.id === idBoton);
   if (productosEnCarrito.some((producto) => producto.id === idBoton)) {
@@ -129,7 +129,7 @@ function disminuirProducto(e) {
     cargarProductosCarrito(productosEnCarrito);
   }
   if (productoADisminuir.cantidad === 0) {
-    EliminarDelCarrito(e);
+    eliminarDelCarrito(e);
     localStorage.clear();
   }
 }
