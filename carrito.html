@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MercaShop</title>
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"/>
     <link rel="stylesheet" href="css/main.css" />
   </head>
@@ -13,7 +13,17 @@
   <body>
     
     <div class="wrapper" id="wrapper">
+      <header class="mobile">
+        <h1 class="logo 
+          animate__animated animate__backInDown">Merca<span>Shop</span></h1>
+          <button class="open-menu" id="open-menu">
+            <i class="bi bi-list"></i>
+          </button>
+      </header>
       <aside>
+        <button class="close-menu" id="close-menu">
+          <i class="bi bi-x-square-fill"></i>
+        </button>
         <header>
           <h1 class="logo animate__animated animate__backInDown" id="logo">Merca<span>Shop</span></h1>
         </header>
@@ -25,7 +35,7 @@
               </a>
               <li>
                 <a class="btn-menu btn-cart active" href="carrito.html">
-                  <i class="bi bi-cart-plus"></i><span id="cantidad-compras" class="cantidad-compras disabled animate__animated animate__backInDown"></span>
+                  <i class="bi bi-cart-plus"></i>Carrito<span id="cantidad-compras" class="cantidad-compras disabled animate__animated animate__backInDown"></span>
                 </a>
               </li>
           </ul>
@@ -37,9 +47,9 @@
       <main>
         <h2 class="main-title" id="main-title">Tu Carrito</h2>
         <div class="cart-container" id="cart-container">
-          <p class="empty-cart animate__animated animate__backInDown" id="empty-cart">Tu carrito esta vacio...</p>
-          <img src="/e-commerce/img/cart-empty2.jfif" alt="Robot Triste con carrito vacio" class="img-empty disabled">
-          <img src="/e-commerce/img/cart-full1.jfif" alt="Robot Triste con carrito vacio" class="img-full disabled">
+          <p class="empty-cart animate__animated animate__backInDown" id="empty-cart">Oops, Que pasó? ...Tu carrito esta vacio...</p>
+          <img src="/e-commerce/img/cart-empty2.png" alt="Robot Triste con carrito vacio" id="img-empty" class="img-empty disabled animate__animated animate__backInDown">
+          <img src="/e-commerce/img/cart-full2.png" alt="Robot Triste con carrito vacio" id="img-full" class="img-full disabled animate__animated animate__backInDown">
           <div class="products-cart" id="products-cart">
             <!-- Se completa desde JS -->
           </div>  
@@ -55,10 +65,11 @@
               <button class="btn-buy" id="btn-buy">Comprar Ahora</button>
             </div>
           </div>
-          <p class="buy-sucess disabled animate__animated animate__backInDown" id="buy-sucess">¡Muchas gracias por tu compra!</p>
+          <p class="buy-sucess disabled animate__animated animate__backInDown" id="buy-sucess">¡Que bien...Muchas gracias por tu compra!</p>
         </div>
       </main>
     </div>
+      <script src="js/menu.js"></script>
       <script src="js/main.js"></script>
       <script src="js/carrito.js"></script>
     </body>

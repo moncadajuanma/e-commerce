@@ -4,6 +4,7 @@ let contenedorProductos = document.querySelector("#products-container");  // con
 const botonesCategorias = document.querySelectorAll(".btn-category");  //botones de menu categoria
 let botonesAgregar = document.querySelectorAll(".product-add");
 const titulo = document.querySelector("#main-title");
+
 let productosEnCarrito = [];
 let cantidadCompras;
 

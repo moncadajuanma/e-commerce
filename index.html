@@ -12,10 +12,18 @@
 
   <body>
     <div class="wrapper">
+      <header class="mobile">
+        <h1 class="logo 
+          animate__animated animate__backInDown">Merca<span>Shop</span></h1>
+        <button class="open-menu" id="open-menu"><i class="bi bi-list"></i></button>
+      </header>
       <aside>
+        <button id="close-menu" class="close-menu">
+          <i class="bi bi-x-square-fill"></i>
+        </button>
         <header>
           <h1 class="logo 
-          animate__animated animate__backInDown">Merca<span>Shop</span></h1>
+          animate__animated animate__backInDown" id="aside-logo">Merca<span>Shop</span></h1>
         </header>
         <nav>
           <ul class="menu">
@@ -33,7 +41,7 @@
             </li>
             <li class="li-btn-cart">
               <a class="btn-cart btn-menu" href="carrito.html">
-                <i class="bi bi-cart-plus"></i>
+                <i class="bi bi-cart-plus"></i>Carrito
                 <span id="cantidad-compras" class="cantidad-compras disabled animate__animated animate__backInDown "></span>
               </a>
               <p class="resultado-total-compra" id="resultado-total-compra"> </p>
@@ -54,6 +62,7 @@
         </div>
       </main>
     </div>
+    <script src="js/menu.js"></script>
     <script src="js/productos.js"></script>
     <script src="js/main.js"></script>
     <script src="js/carrito.js"></script>
