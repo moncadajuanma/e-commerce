@@ -175,7 +175,7 @@ comprarCarrito.addEventListener("click", () => {
 
 // Funcion vacia el carrito por completo eliminando el localstorage
 vaciarCarrito.addEventListener("click", () => {
-  // localStorage.clear();
+  localStorage.clear();
   numeroCantidadCompras.innerHTML = 0;
   numeroCantidadCompras.classList.remove("disabled");
   eventosCarrito.classList.add("disabled");
