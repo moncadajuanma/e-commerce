@@ -488,7 +488,7 @@ border-radius: 1rem;
 
 .products-cart {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   justify-content: center;
   padding-left: 0.7rem;
 }
