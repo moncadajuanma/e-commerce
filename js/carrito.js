@@ -33,6 +33,7 @@ if (carritoLS) {
 // funcion que carga los productos en el carrito cuando se agregarn
 function cargarProductosCarrito(productos) {
   contenedorProductosCarrito.innerHTML = "";
+  
   productos.forEach((producto) => {
     const div = document.createElement("div");
     div.classList.add("products-cart");

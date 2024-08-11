@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
 
 :root {
   --color-background1: #4a5568;
@@ -14,39 +14,48 @@
   --color-alert: #ef0d33;
   /* --color-alert: #ef0d33; */
   --color-sucessful: #78fc69;
-  --color-warning: #BB4430;
+  --color-warning: #bb4430;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Rubik', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, p, a, input, textarea {
-    margin: 0;
-    padding: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+input,
+textarea {
+  margin: 0;
+  padding: 0;
 }
 
 ul {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr 4fr ;
+  grid-template-columns: 1fr 4fr;
   background-color: var(--color-background1);
 }
 
 aside {
   display: flex;
   flex-direction: column;
-  justify-content:space-between;
+  justify-content: space-between;
   position: sticky;
   top: 0;
   height: 100vh;
@@ -126,7 +135,7 @@ header h1 span {
   background-color: var(--color-alert);
   border: 2px solid var(--color-alert);
   color: var(--color-main3);
-  padding: .3rem;
+  padding: 0.3rem;
   border-radius: 5rem;
   width: 2rem;
   height: 2rem;
@@ -145,7 +154,7 @@ header h1 span {
 
 .resultado-total-compra {
   padding: 0 1.5rem;
-  font-size: 0.80rem;
+  font-size: 0.8rem;
 }
 
 span {
@@ -180,8 +189,8 @@ main {
 }
 
 .product-img {
-max-width: 100%;
-border-radius: 1rem;
+  max-width: 100%;
+  border-radius: 1rem;
 }
 
 .product-datail {
@@ -217,10 +226,9 @@ border-radius: 1rem;
   border: 1px solid var(--color-background2);
 }
 
-.agregar  {
+.agregar {
   font-size: 1.1rem;
 }
-
 
 .product-add:hover {
   background-color: var(--color-warning);
@@ -239,7 +247,7 @@ border-radius: 1rem;
   gap: 2rem;
 }
 
-.empty-cart, 
+.empty-cart,
 .buy-sucess {
   color: var(--color-alert);
   margin: 1rem;
@@ -248,7 +256,8 @@ border-radius: 1rem;
   font-weight: 500;
 }
 
-.img-empty, .img-full {
+.img-empty,
+.img-full {
   width: 40%;
   height: 40%;
   margin: auto;
@@ -262,6 +271,7 @@ border-radius: 1rem;
 
 .product-cart {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   background-color: var(--color-main2);
   border-radius: 1rem;
@@ -292,7 +302,7 @@ border-radius: 1rem;
   font-size: 1rem;
 }
 
-.suma-producto, 
+.suma-producto,
 .resta-producto {
   width: 1.5rem;
   border: 1px solid var(--color-alert);
@@ -338,8 +348,8 @@ border-radius: 1rem;
 }
 
 .delete-product:hover {
-  transform:scale(1.2);
-  transition: .3s;
+  transform: scale(1.2);
+  transition: 0.3s;
 }
 
 .events-cart {
@@ -417,11 +427,9 @@ border-radius: 1rem;
   display: none;
 }
 
-
 /* MEDIA QUERYS */
 
-@media screen and (max-width: 600px){
-  
+@media screen and (max-width: 780px) {
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -488,7 +496,8 @@ border-radius: 1rem;
     color: var(--color-main3);
   }
 
-  .open-menu, .close-menu {
+  .open-menu,
+  .close-menu {
     background-color: var(--color-background1);
     border: 0;
     font-size: 2rem;
@@ -502,31 +511,30 @@ border-radius: 1rem;
     top: 1rem;
     right: 1rem;
   }
-}
 
-.products-cart {
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-content: center;
-}
+  .products-cart {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+  }
 
-.product-cart {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  text-align: center;
-  gap: 0.5rem;
-  padding: 1rem;
-}
+  .product-cart {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: 0.5rem;
+  }
 
-.events-cart {
-  margin-top: 0;
-  align-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
+  .events-cart {
+    margin-top: 0;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 
-.total,
-.drop-cart,
-.btn-buy {
-  font-size: 0.8rem;
+  .total,
+  .drop-cart,
+  .btn-buy {
+    font-size: 0.75rem;
+  }
 }
