@@ -50,9 +50,13 @@ aside {
   position: sticky;
   top: 0;
   height: 100vh;
-  padding: 2rem;
+  padding: 1.5rem;
   padding-right: 0;
   color: var(--color-main3);
+}
+
+header h1 {
+  padding-right: 1rem;
 }
 
 header h1 span {
@@ -200,8 +204,8 @@ border-radius: 1rem;
   border: 0;
   background-color: var(--color-background2);
   color: var(--color-main2);
-  padding: 0.25rem;
-  font-size: 0.75rem;
+  padding: 0.35rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -218,10 +222,29 @@ border-radius: 1rem;
 
 /* Carrito */
 
+
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  gap: 2rem;
+}
+
 .empty-cart, 
 .buy-sucess {
   color: var(--color-alert);
   margin: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.img-empty, .img-full {
+  width: 40%;
+  height: 40%;
+  margin: auto;
+  border-radius: 1rem;
+  box-shadow: 1rem 1rem 1rem 1rem var(--color-main1);
 }
 
 .products-cart {

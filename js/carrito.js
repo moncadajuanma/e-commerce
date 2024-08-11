@@ -7,6 +7,8 @@ const eventosCarrito = document.querySelector(".events-cart");
 const precioTotal = document.querySelector("#amount-total");
 const vaciarCarrito = document.querySelector("#drop-cart");
 const comprarCarrito = document.querySelector("#btn-buy");
+const imagenEmpty = document.querySelector(".img-empty");
+const imagenFull = document.querySelector(".img-full");
 
 const numeritoCompras = JSON.parse(localStorage.getItem("cantidad-compras"));
 const carrito = JSON.parse(localStorage.getItem("carrito"));
@@ -14,11 +16,14 @@ const carrito = JSON.parse(localStorage.getItem("carrito"));
 if (carrito) {
   notificacionCarritoVacio.classList.add("disabled");
   eventosCarrito.classList.remove("disabled");
+  imagenEmpty.classList.add("disabled");
+  imagenFull.classList.add("disabled");
   cargarProductosCarrito(carrito);
   totalizarCompra(productosEnCarrito);
 } else {
   eventosCarrito.classList.add("disabled");
   notificacionCarritoVacio.classList.remove("disabled");
+  imagenEmpty.classList.remove("disabled");
   actualizarNumeroCarrito();
 }
 
@@ -150,16 +155,6 @@ function totalizarCompra() {
   localStorage.setItem("total-compra", JSON.stringify(totalCompra));
 }
 
-// Funcion que me elimina todo del carrito
-function dropCart (numeritoCompras) {
-  localStorage.clear();
-  numeroCantidadCompras.innerHTML = numeritoCompras;
-  numeroCantidadCompras.classList.remove("disabled");
-  
-  actualizarNumeroCarrito();
-  // localStorage.setItem("cantidad-compras", JSON.stringify(numerito));
-}
-
 // Funcion que simula la compra de lo que hay en el carrito
 comprarCarrito.addEventListener("click", () => {
   let compras = JSON.parse(localStorage.getItem("cantidad-compras"));
@@ -167,6 +162,7 @@ comprarCarrito.addEventListener("click", () => {
   if (compras > 0 && valorCarrito > 0 ) {
     localStorage.clear();
     notificacionCompraExitosa.classList.remove("disabled");
+    imagenFull.classList.remove("disabled");
     eventosCarrito.classList.add("disabled");
     contenedorProductosCarrito.classList.add("disabled");
     numeroCantidadCompras.innerHTML = 0;
@@ -182,6 +178,7 @@ vaciarCarrito.addEventListener("click", () => {
   numeroCantidadCompras.classList.remove("disabled");
   eventosCarrito.classList.add("disabled");
   notificacionCarritoVacio.classList.remove("disabled");
+  imagenEmpty.classList.remove("disabled");
   cargarProductosCarrito();
 });
 
