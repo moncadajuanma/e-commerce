@@ -31,7 +31,7 @@ function cargarProductos(productos) {
     <div class="product-datail">
       <h3 class="product-title">${producto.titulo}</h3>
       <p class="product-price">$ ${producto.precio.toLocaleString("es-CO")}</p>
-      <button class="product-add" id="${producto.id}" >Agregar al Carrito</button>
+      <button class="product-add" id="${producto.id}" >Agregar <i class="bi bi-cart-plus agregar"></i></button>
     </div>
     `;
     contenedorProductos.append(div);

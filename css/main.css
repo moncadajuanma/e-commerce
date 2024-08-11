@@ -210,12 +210,17 @@ border-radius: 1rem;
   background-color: var(--color-background2);
   color: var(--color-main2);
   padding: 0.35rem;
-  font-size: 0.85rem;
+  font-size: 1rem;
   text-transform: uppercase;
   border-radius: 0.8rem;
   cursor: pointer;
   border: 1px solid var(--color-background2);
 }
+
+.agregar  {
+  font-size: 1.1rem;
+}
+
 
 .product-add:hover {
   background-color: var(--color-warning);
@@ -461,7 +466,11 @@ border-radius: 1rem;
   }
 
   .main-title {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+  }
+
+  .product-add {
+    font-size: 0.85rem;
   }
 
   .products-container {
