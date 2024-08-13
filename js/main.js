@@ -1,3 +1,10 @@
+// // let productos = [];
+
+// fetch("./js/productos.json")
+//   .then((response) => response.json)
+//   .then((data) => productos = data);
+
+
 const contenedorProductosCarrito = document.querySelector("#products-cart"); //container del carrito
 let numeroCantidadCompras = document.querySelector(".cantidad-compras");  //numerito carrito
 let contenedorProductos = document.querySelector("#products-container");  // container de productos
@@ -85,6 +92,13 @@ function agregarAlCarrito(e) {
   }
   actualizarNumeroCarrito();
   localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
+  Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "El producto ha sido agregado correctamente",
+    showConfirmButton: false,
+    timer: 1500
+  });
 }
 
 // Funcion que me acumula las compras y las muestra en la notificacion del carrito
